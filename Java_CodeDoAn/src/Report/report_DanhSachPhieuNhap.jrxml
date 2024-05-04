@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_DanhSachHoaDon" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15ccc024-137a-405f-b89d-c480f1bc42f3">
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="tongTien" class="java.lang.String"/>
+	<parameter name="hoTenNhanVien" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="maPhieuNhap" class="java.lang.String"/>
+	<field name="ngayNhap" class="java.lang.String"/>
+	<field name="maNhaCungCap" class="java.lang.String"/>
+	<field name="maXe" class="java.lang.String"/>
+	<field name="giaNhap" class="java.lang.String"/>
+	<field name="soLuong" class="java.lang.String"/>
+	<field name="thanhTien" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="202" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="130" width="550" height="34" forecolor="#990D0B" uuid="a57c0ea0-ab91-4bbf-9b2e-caa0b416c22a"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THỐNG KÊ PHIẾU NHẬP KHO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="164" width="50" height="30" forecolor="#990D0B" uuid="0f4658f6-16e4-4be8-963b-faa339c4a1ca"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NĂM]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="-14" width="159" height="118" uuid="2b80c44d-83b2-49c5-88ed-289e125b85f5"/>
+				<imageExpression><![CDATA["C:/aDrop_Box/Job/Study_21110927/2023-2024/Ki_2/AdvancedProgrammingLanguage/Project_CuoiKy/Image/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="110" y="13" width="59" height="26" forecolor="#10C44F" uuid="b2988991-f29c-42e4-a9e4-8d6052cce880"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HTML]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="66" width="127" height="20" forecolor="#636363" uuid="924e53e0-d854-409b-b504-b66438efa90f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Best Car For You]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="18" width="160" height="20" uuid="bd204f3f-e14f-42cf-9495-cbe6a057b012"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: 01 Võ Văn Ngân, Linh Chiểu, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="160" height="20" uuid="d3fc328c-8ebb-412e-ad61-a3c52f35392a"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỬA HÀNG Ô TÔ HTML]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="36" width="160" height="20" uuid="deb90f91-5f2a-4a49-bc60-20567d4e2ff7"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Thủ Đức, Thành phố Hồ Chí Minh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="70" width="210" height="20" uuid="d5ba0be2-80ce-4afc-baed-6764705d66af"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="86" width="210" height="20" uuid="6a5e7b36-e5bb-40dd-9295-a5d74e81d49a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Độc lập - Tự do - Hạnh phúc]]></text>
+			</staticText>
+			<line>
+				<reportElement x="186" y="105" width="200" height="1" uuid="086ff415-bf99-4e63-83d2-86c9d96409e5"/>
+			</line>
+			<textField>
+				<reportElement x="281" y="164" width="100" height="30" forecolor="#990D0B" uuid="f98bc5c3-5fdf-4fa2-8847-d6014f045d0b"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="30" uuid="619bdc36-0052-4fd7-a118-657a472b56c2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0837a7e7-97eb-4ef4-9507-6ac58364f7d4"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã Phiếu Nhập]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="79" height="30" uuid="532235b6-ac11-4e9d-b077-197404b2e2db">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0118d13e-9810-4434-90ab-1620dd1281d9"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày Nhập]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="79" height="30" uuid="fa173fb6-5191-47e7-b6d0-5f542b253bcf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="54a7dc34-ca68-438f-87c6-46fbec104fec"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà Cung Cấp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="0" width="79" height="30" uuid="c9cc6942-0888-4de7-8baf-749aac0c3e08">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89805fb3-1032-42ab-ac0d-8178af77a357"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã Ô Tô]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="0" width="79" height="30" uuid="daf82109-67b9-4d19-b55e-946b346da295">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcada1e7-e765-4a94-8c26-959c26d1e53c"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giá Nhập]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="0" width="79" height="30" uuid="61a1408d-0283-49ca-a456-25cf71f2f300">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e8616149-c64b-478c-83b9-3903ad63bf57"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số Lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="79" height="30" uuid="3a03d667-7ef2-4fd4-a688-3d0f768b8c00">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d5e7854-4030-475c-bc57-d289891da17c"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thành Tiền]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="81" height="30" uuid="d40b1c70-5d37-4335-81bc-870181a011e0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0837a7e7-97eb-4ef4-9507-6ac58364f7d4"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{maPhieuNhap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="79" height="30" uuid="65576f5a-de5f-440d-bb9a-2042d9f1245a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0118d13e-9810-4434-90ab-1620dd1281d9"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ngayNhap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="79" height="30" uuid="602663b9-8b8b-4149-8dc4-25f19b99460c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="54a7dc34-ca68-438f-87c6-46fbec104fec"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{maNhaCungCap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="0" width="79" height="30" uuid="23dcdf33-6ab2-4e93-bdff-73392c13a6dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89805fb3-1032-42ab-ac0d-8178af77a357"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{maXe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="79" height="30" uuid="9a763380-9f0b-43a6-b9c5-1678e79d89a3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcada1e7-e765-4a94-8c26-959c26d1e53c"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{giaNhap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="79" height="30" uuid="b66c8c5f-24fa-4af1-a3ee-260251d40011">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e8616149-c64b-478c-83b9-3903ad63bf57"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{soLuong}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="0" width="79" height="30" uuid="7f42371c-a68d-4ff5-88fe-c9c110a23cae">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d5e7854-4030-475c-bc57-d289891da17c"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{thanhTien}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="169">
+			<staticText>
+				<reportElement x="300" y="10" width="71" height="30" uuid="688b676c-3130-41aa-be21-42a416e718ee"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TỔNG TIỀN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="371" y="10" width="184" height="30" uuid="9c9ea20a-6471-4706-85ee-5fe2fb8bccc2"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tongTien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="71" width="139" height="20" uuid="afc35a9f-957a-4a00-a11d-08c4ef9f5476"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quản lý cửa hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="51" width="139" height="20" uuid="31ae60ee-2adc-45a0-9519-ff1754061283"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tháng 05 Năm 2024]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="91" width="139" height="20" uuid="02299cf3-c064-4018-aa2a-4b7c181004b1"/>
+				<textElement textAlignment="Center">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Ký, ghi rõ họ tên)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="111" width="139" height="20" uuid="7b00ab8d-58a5-4fa5-a9e2-97ee9c7b49ac"/>
+				<textElement textAlignment="Center">
+					<font size="14" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nguyễn Xuân Thể]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="91" width="139" height="20" uuid="9ea4bfc3-254d-4d83-8636-1086f3defe57"/>
+				<textElement textAlignment="Center">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Ký, ghi rõ họ tên)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="71" width="139" height="20" uuid="0a81d57d-a62a-4226-87ba-e291f51416a2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập bảng kê]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="33" y="111" width="139" height="20" uuid="5baf4160-9b59-4a9d-985a-51c5f83c280c"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hoTenNhanVien}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="0ea3de9e-4589-4955-9553-8ba2ac7951ae">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="33" y="51" width="139" height="20" uuid="5ea01c0d-d7f0-41a0-b209-e4eea3a741dc"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Tháng 05 Năm 2024]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="fc3c2671-929f-4d6b-bbea-3765e4dc15cb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
