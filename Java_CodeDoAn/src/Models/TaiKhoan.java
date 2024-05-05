@@ -19,6 +19,7 @@ public class TaiKhoan {
         tenDangNhap = resultSet.getString("tenDangNhap");
         matKhau = resultSet.getString("matKhau");
         maNhanVien = resultSet.getString("maNhanVien");
+        isAdmin = resultSet.getBoolean("isAdmin");
     }
     
     public String getTenDangNhap() {
@@ -52,4 +53,11 @@ public class TaiKhoan {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    @Override
+    public String toString() {
+        return "TaiKhoan{" + "tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + ", maNhanVien=" + maNhanVien + ", isAdmin=" + isAdmin + '}';
+    }
+    
+    
 }

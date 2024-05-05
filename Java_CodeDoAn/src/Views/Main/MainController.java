@@ -102,7 +102,7 @@ public class MainController extends javax.swing.JFrame {
         menu.addEventMenu((int index) -> {
             System.out.println(String.valueOf(index));
             //System.out.println(tk.getTenDangNhap());
-            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, (long) 200, "Message");
+            //Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, (long) 200, "Message");
             refreshData();
             switch (index) {
                 case 0 -> {
