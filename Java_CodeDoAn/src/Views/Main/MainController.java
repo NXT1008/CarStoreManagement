@@ -109,14 +109,27 @@ public class MainController extends javax.swing.JFrame {
                     setForm(fHome);
                 }
                 case 1 -> {
-                    setForm(fNhanVien);
+                    if (tk.isIsAdmin()){
+                        setForm(fNhanVien);
+                    }
+                    else{
+                        MessageAlerts.getInstance().showMessage("Cảnh báo!!!", 
+                                "Chức năng này chỉ dành cho quản lý!", MessageAlerts.MessageType.ERROR);
+                    }
                 }
                 case 2 ->
                     setForm(fOTo);
                 case 3 -> // Khách Hàng
                     setForm(fKhachhang);
-                case 4 ->
-                    setForm(fChiNhanh);
+                case 4 -> {
+                    if (tk.isIsAdmin()){
+                        setForm(fChiNhanh);
+                    }
+                    else{
+                        MessageAlerts.getInstance().showMessage("Cảnh báo!!!", 
+                                "Chức năng này chỉ dành cho quản lý!", MessageAlerts.MessageType.ERROR);
+                    }
+                }
                 case 5 ->
                     setForm(fNhaCungCap);
                 case 6 ->
