@@ -32,7 +32,7 @@
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="btnReset" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="btnReset" min="-2" pref="112" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -223,9 +223,9 @@
                       <Component id="tfSoDienThoai" min="-2" pref="138" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="34" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="tfNgaySinh" pref="138" max="32767" attributes="0"/>
-                      <Component id="tfGioiTinh" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="tfNgaySinh" min="-2" pref="138" max="-2" attributes="0"/>
+                      <Component id="cbbGioiTinh" min="-2" pref="137" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -257,8 +257,8 @@
                       <Component id="tfCCCD" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfSoDienThoai" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbbMaChiNhanh" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfGioiTinh" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfDiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbbGioiTinh" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
@@ -306,14 +306,14 @@
             <Property name="labelText" type="java.lang.String" value="Ch&#x1ee9;c V&#x1ee5;"/>
           </Properties>
         </Component>
-        <Component class="Views.OtherForm.swing.TextField" name="tfGioiTinh">
-          <Properties>
-            <Property name="labelText" type="java.lang.String" value="Gi&#x1edb;i T&#xed;nh"/>
-          </Properties>
-        </Component>
         <Component class="Views.OtherForm.swing.TextField" name="tfDiaChi">
           <Properties>
             <Property name="labelText" type="java.lang.String" value="&#x110;&#x1ecb;a Ch&#x1ec9;"/>
+          </Properties>
+        </Component>
+        <Component class="Views.OtherForm.component.Combobox.Combobox" name="cbbGioiTinh">
+          <Properties>
+            <Property name="labeText" type="java.lang.String" value="Gi&#x1edb;i T&#xed;nh"/>
           </Properties>
         </Component>
       </SubComponents>

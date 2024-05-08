@@ -42,4 +42,12 @@ public class KhachHangService {
     public boolean delete(String model){
         return KhachHangDAO.getInstance().delete(model);
     }
+    
+    public boolean checkDuplicateCCCD(String CCCD){
+        return (KhachHangDAO.getInstance().findByCCCD(CCCD) != null);
+    }
+    
+    public boolean checkDuplicatePhone(String sdt){
+        return (KhachHangDAO.getInstance().findByNumberPhone(sdt) != null);
+    }
 }

@@ -86,6 +86,29 @@ public class KhachHangDAO {
         return null;
     }
     
+    public KhachHang findOne(String hoTen, String sdt, String CCCD){
+        KhachHang kh;
+        String query = "select * from KHACHHANG where hoTenKhachHang = ? and soDienThoai = ? and CCCD = ?";
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, hoTen);
+            ps.setString(2, sdt);
+            ps.setString(3, CCCD);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                kh = new KhachHang(rs);
+                conn.close();
+                return kh;
+            }
+            
+            
+            
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
     public KhachHang findByNumberPhone(String sdt){
         KhachHang kh;
         String query = "select * from KHACHHANG where soDienThoai = ?";
@@ -93,6 +116,26 @@ public class KhachHangDAO {
             conn = DBConnection.getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, sdt);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                kh = new KhachHang(rs);
+                return kh;
+            }
+            
+            
+            conn.close();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public KhachHang findByCCCD(String CCCD){
+        KhachHang kh;
+        String query = "select * from KHACHHANG where CCCD = ?";
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, CCCD);
             rs = ps.executeQuery();
             while (rs.next()){
                 kh = new KhachHang(rs);

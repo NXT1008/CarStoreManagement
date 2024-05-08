@@ -1,6 +1,7 @@
 
 package Views.OtherForm;
 
+import DAO.FormatMoney;
 import DAO.XeDAO;
 import Models.HoaDon;
 import Models.KhachHang;
@@ -244,7 +245,8 @@ public class fHoaDon extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(16, Short.MAX_VALUE)
                         .addComponent(panelRound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -287,6 +289,11 @@ public class fHoaDon extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(2)) + 1;
+        tfMaHoaDon.setText(String.format("HD%04d", num));
+        tfMaHoaDon.setEditable(false);
+        tfTinhTrang.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -295,6 +302,7 @@ public class fHoaDon extends javax.swing.JPanel {
         EnableButtonSystem();
         DisableButtonEditData();
         tfMaHoaDon.setEditable(false);
+        tfTinhTrang.setEditable(false);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -403,7 +411,6 @@ public class fHoaDon extends javax.swing.JPanel {
         NhanVien nv = NhanVienService.getInstance().findOne(cbbMaNhanVienThucHien.getSelectedItem().toString());
         KhachHang kh = KhachHangService.getInstance().findOne(cbbMaKhachHang.getSelectedItem().toString());
         Xe xe = XeService.getInstance().findOne(cbbMaXe.getSelectedItem().toString());
-        System.out.println(xe.getTenXe());
         //Fields Report
         List<Fields_Report_HoaDon> fields = new ArrayList<>();
         fields.add(new Fields_Report_HoaDon(xe.getTenXe(), xe.getHangXe(), xe.getXuatXu(), xe.getGiaBan()));
@@ -418,6 +425,10 @@ public class fHoaDon extends javax.swing.JPanel {
         dataPrint.setDiaChiKH(kh.getDiaChi());
         dataPrint.setSoDienThoaiKH(kh.getSoDienThoai());
         dataPrint.setCCCDKhachHang(kh.getcCCD());
+        dataPrint.setGiaOTo(String.valueOf(FormatMoney.formatMoney(xe.getGiaBan()) + " VNĐ"));
+        dataPrint.setTongCacLoaiPhi(String.valueOf(FormatMoney.formatMoney((long)20000000) + " VNĐ"));
+        dataPrint.setThueVAT(String.valueOf(FormatMoney.formatMoney((long)((long)xe.getGiaBan() * 0.1)) + " VNĐ"));
+        dataPrint.setTongTien(String.valueOf(FormatMoney.formatMoney((long)((long)xe.getGiaBan() * 1.1 + 20000000)) + " VNĐ"));
         dataPrint.setListFields(fields);
         
         try {
@@ -445,6 +456,10 @@ public class fHoaDon extends javax.swing.JPanel {
                 o.getTinhTrang(), o.getMaKhachHang(), o.getMaNhanVienThucHien()
             });
         }
+        
+        loadMaKhachHang();
+        loadMaNhanVien();
+        loadMaXe();
 
     }
     
@@ -483,6 +498,7 @@ public class fHoaDon extends javax.swing.JPanel {
         // Custom Table
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         tblHoaDon.setModel(dtm);
+        tblHoaDon.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Hóa Đơn");
         dtm.addColumn("Ngày Lập");

@@ -10,9 +10,11 @@ import Views.OtherForm.component.Card.Card_CarHome;
 import Views.OtherForm.component.Card.Card_CarHome1;
 import Views.OtherForm.component.Card.Card_CarHome2;
 import Views.OtherForm.swing.WrapLayout;
+import groovyjarjarantlr.debug.MessageAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import raven.alerts.MessageAlerts;
 
 
 
@@ -29,6 +31,7 @@ public class fHome extends javax.swing.JPanel{
         loadHome();
         NhanVien nv = NhanVienService.getInstance().findOne(fLogin.getTk().getMaNhanVien());
         lblTenNhanVien.setText(nv.getHoTenNhanVien());
+        searchText.setText("");
     }
 
     // Load New Car
@@ -69,6 +72,7 @@ public class fHome extends javax.swing.JPanel{
 
     // Load All Car
     public void loadHome(){
+        panelHome.removeAll();
         panelHome.setLayout(new WrapLayout(WrapLayout.LEADING, 20, 20));
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
         List<Xe> list = XeService.getInstance().danhSachXe();
@@ -109,7 +113,7 @@ public class fHome extends javax.swing.JPanel{
         jLabel1 = new javax.swing.JLabel();
         lblTenNhanVien = new javax.swing.JLabel();
         panelRound1 = new Views.OtherForm.swing.PanelRound();
-        searchText1 = new Views.Main.swing.SearchText();
+        searchText = new Views.Main.swing.SearchText();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         pictureBox1 = new Views.OtherForm.swing.PictureBox();
@@ -137,6 +141,12 @@ public class fHome extends javax.swing.JPanel{
         panelRound1.setRoundTopLeft(30);
         panelRound1.setRoundTopRight(30);
 
+        searchText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextActionPerformed(evt);
+            }
+        });
+
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Main/icon/search.png"))); // NOI18N
 
@@ -148,12 +158,12 @@ public class fHome extends javax.swing.JPanel{
                 .addGap(11, 11, 11)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(searchText1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+            .addComponent(searchText, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -247,6 +257,46 @@ public class fHome extends javax.swing.JPanel{
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
+        // Lấy từ khóa tìm kiếm từ searchText1
+        String keyword = searchText.getText().trim();
+
+        // Load lại danh sách xe dựa trên từ khóa tìm kiếm
+        List<Xe> list = XeService.getInstance().timKiemXe(keyword);
+        
+        // Nếu danh sách xe rỗng
+        if (list.isEmpty()){
+            MessageAlerts.getInstance().showMessage("Xin lỗi", "Không tìm thấy mẫu xe này", 
+                    MessageAlerts.MessageType.ERROR);
+        }
+
+        else{
+             // Xóa các card hiện có trong panelHome
+            panelHome.removeAll();
+        
+            // Hiển thị danh sách xe lên panelHome
+            for (Xe o : list) {
+                Card_CarHome2 card = new Card_CarHome2();
+                card.setData(o);
+
+                panelHome.add(card);
+
+                card.getPanelRound().addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if (listener != null) {
+                            listener.onCardClicked(o); // Thông báo rằng một card đã được click
+                        }
+                    }
+                });
+            }
+
+            // Yêu cầu panelHome vẽ lại giao diện
+            panelHome.revalidate();
+            panelHome.repaint();
+        }
+    }//GEN-LAST:event_searchTextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Views.OtherForm.component.Card.Card_CarHome cardTop1;
@@ -261,6 +311,6 @@ public class fHome extends javax.swing.JPanel{
     private Views.OtherForm.swing.PanelRound panelRound1;
     private Views.OtherForm.swing.PictureBox pictureBox1;
     private Views.OtherForm.swing.PictureBox pictureBox2;
-    private Views.Main.swing.SearchText searchText1;
+    private Views.Main.swing.SearchText searchText;
     // End of variables declaration//GEN-END:variables
 }

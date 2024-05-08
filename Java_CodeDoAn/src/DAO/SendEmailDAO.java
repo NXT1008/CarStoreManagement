@@ -21,14 +21,14 @@ import javax.mail.internet.MimeMessage;
 public class SendEmailDAO {
     public MessageModel sendMain(String toEmail, String code) {
         MessageModel ms = new MessageModel(false, "");
-        String from = "******@gmail.com";
+        String from = "21110927@student.hcmute.edu.vn";
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
-        String username = "******@gmail.com";
-        String password = "******";    //  Your email password here
+        String username = "21110927@student.hcmute.edu.vn";
+        String password = "10082003Nxt@";    //  Your email password here
         Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {

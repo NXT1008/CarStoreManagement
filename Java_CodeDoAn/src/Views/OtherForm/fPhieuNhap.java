@@ -2,14 +2,9 @@
 package Views.OtherForm;
 
 import DAO.XeDAO;
-import Models.PhieuBaoDuong;
 import Models.PhieuNhap;
 import Services.ChiNhanhService;
-import Services.DichVuBaoDuongService;
-import Services.KhachHangService;
 import Services.NhaCungCapService;
-import Services.NhanVienService;
-import Services.PhieuBaoDuongService;
 import Services.PhieuNhapService;
 import Services.XeService;
 import Views.OtherForm.component.CustomJTable.TableActionCellEditor;
@@ -234,8 +229,8 @@ public class fPhieuNhap extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)))
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -268,6 +263,10 @@ public class fPhieuNhap extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(2)) + 1;
+        tfMaPhieuNhap.setText(String.format("PN%04d", num));
+        tfMaPhieuNhap.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -288,6 +287,12 @@ public class fPhieuNhap extends javax.swing.JPanel {
         long giaNhap = 0;
         try {
             giaNhap = (long) Double.parseDouble(tfGiaNhap.getText());
+            if(giaNhap < 0){
+                MessageAlerts.getInstance().showMessage("Fail!", "Giá nhập phải là số nguyên dương!",
+                    MessageAlerts.MessageType.ERROR);
+                tfGiaNhap.requestFocus();
+                return;
+            }
         } catch (NumberFormatException e) {
             MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập giá trị số cho Giá nhập",
                     MessageAlerts.MessageType.ERROR);
@@ -297,6 +302,12 @@ public class fPhieuNhap extends javax.swing.JPanel {
         int soLuong = 0;
         try {
             soLuong = Integer.parseInt(tfSoLuong.getText());
+            if(soLuong < 0){
+                MessageAlerts.getInstance().showMessage("Fail!", "Số lượng phải >= 0!",
+                    MessageAlerts.MessageType.ERROR);
+                tfSoLuong.requestFocus();
+                return;
+            }
         } catch (NumberFormatException e) {
             MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập giá trị số Số lượng",
                     MessageAlerts.MessageType.ERROR);
@@ -425,6 +436,7 @@ public class fPhieuNhap extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
 
         tblPhieuNhap.setModel(dtm);
+        tblPhieuNhap.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Phiếu Nhập");
         dtm.addColumn("Mã Xe");

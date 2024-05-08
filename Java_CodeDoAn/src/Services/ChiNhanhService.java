@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Services;
 
 import DAO.ChiNhanhDAO;
@@ -45,6 +42,10 @@ public class ChiNhanhService {
     
     public boolean delete(String ma){
         return ChiNhanhDAO.getInstance().delete(ma);
+    }
+    
+    public boolean checkSamePhone(String sdt){
+        return (ChiNhanhDAO.getInstance().findByPhone(sdt) != null);
     }
     
 }

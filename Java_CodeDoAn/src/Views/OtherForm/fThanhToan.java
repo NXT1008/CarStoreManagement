@@ -21,7 +21,7 @@ import java.awt.Component;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,6 +102,19 @@ public class fThanhToan extends javax.swing.JPanel {
 
     private void loadAll(){
         loadTinhThanh();
+        loadGioiTinh();
+    }
+    
+    private void loadGioiTinh(){
+        List<String> list = new ArrayList<>();
+        list.add("Nam");
+        list.add("Nữ");
+        String[] arr = new String[list.size()];
+        for (int i=0; i<list.size(); i++){
+            arr[i] = list.get(i);
+        }
+        ComboBoxModel<String> model = new DefaultComboBoxModel<>(arr);
+        cbbGioiTinh.setModel(model);
     }
     
     private void loadTinhThanh(){
@@ -171,7 +184,7 @@ public class fThanhToan extends javax.swing.JPanel {
         tinhThanh.add("Bạc Liêu");
         tinhThanh.add("Cà Mau");
         tinhThanh.add("Điện Biên");
-        tinhThanh.add("Hà Tây");
+        tinhThanh.add("Sơn La");
         
         String[] arr = new String[tinhThanh.size()];
         for (int i=0; i<tinhThanh.size(); i++){
@@ -187,7 +200,6 @@ public class fThanhToan extends javax.swing.JPanel {
         Map<String, List<String>> districtMap = new HashMap<>();
         districtMap.put("An Giang", Arrays.asList("An Phú", "Châu Phú", "Châu Thành", "Chợ Mới", "Phú Tân", "Thoại Sơn", "Tịnh Biên", "Tri Tôn"));
         districtMap.put("Bà Rịa - Vũng Tàu", Arrays.asList("Bà Rịa", "Châu Đức", "Côn Đảo", "Đất Đỏ", "Long Điền", "Tân Thành", "Vũng Tàu", "Xuyên Mộc"));
-        // Bổ sung các quận (huyện) cho các tỉnh thành khác tương tự như trên
         districtMap.put("Bạc Liêu", Arrays.asList("Bạc Liêu", "Đông Hải", "Giá Rai", "Hòa Bình", "Phước Long"));
         districtMap.put("Bắc Kạn", Arrays.asList("Bắc Kạn", "Bạch Thông", "Chợ Đồn", "Chợ Mới", "Na Rì", "Ngân Sơn", "Pác Nặm"));
         districtMap.put("Bắc Giang", Arrays.asList("Bắc Giang", "Hiệp Hòa", "Lạng Giang", "Lục Nam", "Lục Ngạn", "Sơn Động", "Tân Yên", "Việt Yên", "Yên Dũng", "Yên Thế"));
@@ -248,7 +260,8 @@ public class fThanhToan extends javax.swing.JPanel {
         districtMap.put("Vĩnh Long", Arrays.asList("Bình Tân", "Long Hồ", "Mang Thít", "Tam Bình", "Trà Ôn", "Vũng Liêm"));
         districtMap.put("Vĩnh Phúc", Arrays.asList("Bình Xuyên", "Lập Thạch", "Sông Lô", "Tam Đảo", "Tam Dương", "Vĩnh Tường", "Yên Lạc"));
         districtMap.put("Yên Bái", Arrays.asList("Lục Yên", "Mù Căng Chải", "Trạm Tấu", "Trấn Yên", "Văn Chấn", "Văn Yên", "Yên Bình"));
-
+        districtMap.put("Hồ Chí Minh", Arrays.asList("Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Bình Tân", "Bình Thạnh", "Gò Vấp", "Phú Nhuận", "Tân Bình", "Tân Phú", "Thủ Đức", "Bình Chánh", "Cần Giờ", "Củ Chi", "Hóc Môn", "Nhà Bè"));
+        
         List<String> tenQuan = districtMap.get(tenTinh);
         if (tenQuan != null){
             String[] modelQuan = new String[tenQuan.size()];
@@ -294,7 +307,6 @@ public class fThanhToan extends javax.swing.JPanel {
         tfTen = new Views.OtherForm.swing.TextField_2();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        tfGioiTinh = new Views.OtherForm.swing.TextField_2();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         tfNgaySinh = new Views.OtherForm.swing.TextField_2();
@@ -318,6 +330,7 @@ public class fThanhToan extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         tfSoNha = new Views.OtherForm.swing.TextField_2();
         tfXaPhuong = new Views.OtherForm.swing.TextField_2();
+        cbbGioiTinh = new Views.OtherForm.component.Combobox.Combobox();
         panelRound2 = new Views.OtherForm.swing.PanelRound();
         jLabel10 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -383,8 +396,6 @@ public class fThanhToan extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 0, 0));
         jLabel5.setText("*");
-
-        tfGioiTinh.setShadowColor(new java.awt.Color(0, 0, 255));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel6.setText("Giới tính");
@@ -461,6 +472,8 @@ public class fThanhToan extends javax.swing.JPanel {
 
         tfXaPhuong.setShadowColor(new java.awt.Color(0, 0, 255));
 
+        cbbGioiTinh.setLabeText("");
+
         javax.swing.GroupLayout panelRoundThongTinLayout = new javax.swing.GroupLayout(panelRoundThongTin);
         panelRoundThongTin.setLayout(panelRoundThongTinLayout);
         panelRoundThongTinLayout.setHorizontalGroup(
@@ -476,8 +489,8 @@ public class fThanhToan extends javax.swing.JPanel {
                             .addGroup(panelRoundThongTinLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfXaPhuong, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(tfGioiTinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(tfHo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelRoundThongTinLayout.createSequentialGroup()
                                             .addComponent(jLabel2)
@@ -504,7 +517,7 @@ public class fThanhToan extends javax.swing.JPanel {
                                             .addComponent(jLabel19)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundThongTinLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(tfXaPhuong, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36)
                         .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -556,18 +569,16 @@ public class fThanhToan extends javax.swing.JPanel {
                     .addComponent(tfTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
                 .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRoundThongTinLayout.createSequentialGroup()
-                        .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(0, 0, 0)
-                        .addComponent(tfGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelRoundThongTinLayout.createSequentialGroup()
-                        .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, 0)
-                        .addComponent(tfNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9))
+                    .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
                 .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRoundThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1011,7 +1022,7 @@ public class fThanhToan extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         String hoTen = tfHo.getText() + " " + tfTen.getText();
-        String gioitinh = tfGioiTinh.getText();
+        String gioitinh = cbbGioiTinh.getSelectedItem().toString();
         String ngaySinh = tfNgaySinh.getText();
         
         String sdt = tfSoDienThoai.getText();
@@ -1036,8 +1047,8 @@ public class fThanhToan extends javax.swing.JPanel {
         
         String diaChi = "";
         if (cbbQuanHuyen.getSelectedItem() != null && cbbTinhThanh.getSelectedItem() != null){
-            diaChi = tfSoNha.getText() + " " + tfXaPhuong.getText() + " " + 
-                cbbQuanHuyen.getSelectedItem().toString() + " " + 
+            diaChi = tfSoNha.getText() + ", " + tfXaPhuong.getText() + ", " + 
+                cbbQuanHuyen.getSelectedItem().toString() + ", " + 
                 cbbTinhThanh.getSelectedItem().toString();
         }
         else{
@@ -1062,16 +1073,39 @@ public class fThanhToan extends javax.swing.JPanel {
             return;
         }
         
-        KhachHang kh = KhachHangDAO.getInstance().findByNumberPhone(sdt);
-        if (kh == null){
-            kh = new KhachHang();
-            kh.setHoTenKhachHang(hoTen);
+        KhachHang kh = KhachHangDAO.getInstance().findOne(hoTen, sdt, cccd);
+        if (kh != null){ // Đã có khách hàng => Cho thanh toán
             kh.setNgaySinh(date);
             kh.setGioiTinh(gioitinh);
-            kh.setSoDienThoai(sdt);
-            kh.setcCCD(cccd);
             kh.setDiaChi(diaChi);
-            KhachHangDAO.getInstance().insert(kh);
+            // Cập nhật thông tin theo tên, sdt, cccd
+            KhachHangDAO.getInstance().update(kh); 
+        }
+        
+        else{ 
+            // Kiểm tra nếu trùng CCCD || Sdt
+            KhachHang kh1 = KhachHangDAO.getInstance().findByNumberPhone(sdt);
+            KhachHang kh2 = KhachHangDAO.getInstance().findByCCCD(cccd);
+            if (kh1 == null && kh2 == null) {
+                kh = new KhachHang();
+                kh.setHoTenKhachHang(hoTen);
+                kh.setNgaySinh(date);
+                kh.setGioiTinh(gioitinh);
+                kh.setSoDienThoai(sdt);
+                kh.setcCCD(cccd);
+                kh.setDiaChi(diaChi);
+                KhachHangDAO.getInstance().insert(kh);
+            }
+            if (kh1 != null){
+                MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại đã được sử dụng!",
+                    MessageAlerts.MessageType.ERROR);
+                return;
+            }
+            if (kh2 != null){
+                MessageAlerts.getInstance().showMessage("Fail!", "CCCD đã được sử dụng!",
+                    MessageAlerts.MessageType.ERROR);
+                return;
+            }
         }
         
         //------------------
@@ -1088,13 +1122,8 @@ public class fThanhToan extends javax.swing.JPanel {
 
             // Chuyển đối tượng java.util.Date thành java.sql.Date
             date1 = new java.sql.Date(d.getTime());
-
-            // Sử dụng date trong các thao tác với cơ sở dữ liệu
-            // Ví dụ: PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO table_name (ngay) VALUES (?)");
-            // preparedStatement.setDate(1, date);
-            // preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+            
+        } catch (ParseException e) {
         }
         
         kh = KhachHangDAO.getInstance().findByNumberPhone(sdt);
@@ -1131,7 +1160,7 @@ public class fThanhToan extends javax.swing.JPanel {
         try {
             Date d = new SimpleDateFormat("yyyy-MM-dd").parse(ngaySinh);
             date = new java.sql.Date(d.getTime());
-        } catch (Exception e) {
+        } catch (ParseException e) {
             MessageAlerts.getInstance().showMessage("Fail!", "Nhập ngày tháng không đúng định dạng yyyy-MM-dd!",
                     MessageAlerts.MessageType.ERROR);
             tfNgaySinh.requestFocus();
@@ -1152,7 +1181,7 @@ public class fThanhToan extends javax.swing.JPanel {
         
         // Check SDT hợp lệ, CCCD hợp lệ
         if(!checkLegalNumberPhone(sdt)){
-            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại phải đúng 10 ký tự số!",
+            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại không hợp lệ!",
                     MessageAlerts.MessageType.ERROR);
             tfSoDienThoai.requestFocus();
             return;
@@ -1160,24 +1189,64 @@ public class fThanhToan extends javax.swing.JPanel {
         
         // Check Trùng CCCD, sdt ...
         if (!checkLegalCCCD(cccd)){
-            MessageAlerts.getInstance().showMessage("Fail!", "CCCD phải đúng 12 ký tự số!",
+            MessageAlerts.getInstance().showMessage("Fail!", "CCCD không hợp lệ!",
                     MessageAlerts.MessageType.ERROR);
             tfCCCD.requestFocus();
             return;
+        }
+        
+        
+        
+        if (KhachHangService.getInstance().checkDuplicateCCCD(cccd)) { // Aldready CCCD
+            MessageAlerts.getInstance().showMessage("Fail!", "CCCD này đã tồn tại, vui lòng kiểm tra lại!",
+                    MessageAlerts.MessageType.ERROR);
+            tfCCCD.requestFocus();
+            return;
+        }
+
+        if (KhachHangService.getInstance().checkDuplicatePhone(sdt)) { // Aldready CCCD
+            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại này đã tồn tại, vui lòng kiểm tra lại!",
+                    MessageAlerts.MessageType.ERROR);
+            tfSoDienThoai.requestFocus();
+            return;
+        }
+        
+        // Trùng 3 thông tin sau thì mới cho phép xuất Report
+        KhachHang kh = KhachHangDAO.getInstance().findOne(hoTen, sdt, cccd);
+        if (kh == null) {
+            
+            // Kiểm tra nếu trùng CCCD || Sdt
+            KhachHang kh1 = KhachHangDAO.getInstance().findByNumberPhone(sdt);
+            KhachHang kh2 = KhachHangDAO.getInstance().findByCCCD(cccd);
+
+            if (kh1 != null) {
+                MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại đã được sử dụng!",
+                        MessageAlerts.MessageType.ERROR);
+                return;
+            }
+            if (kh2 != null) {
+                MessageAlerts.getInstance().showMessage("Fail!", "CCCD đã được sử dụng!",
+                        MessageAlerts.MessageType.ERROR);
+                return;
+            }
         }
         
         // Xuất Report
         String tenKhachHang = getHoTenKhacHang();
         NhanVien nv = NhanVienService.getInstance().findOne(fLogin.getTk().getMaNhanVien());
         String tenNhanVien = nv.getHoTenNhanVien();
-
+        Date ngayNhap = new Date();
         List<Fields_Report_ThanhToan> fields = new ArrayList<>();
-        fields.add(new Fields_Report_ThanhToan(xe.getTenXe(), xe.getXuatXu(), xe.getHangXe(), (long)((long)xe.getGiaBan() * 1.1 + 20000000)));
+        fields.add(new Fields_Report_ThanhToan(xe.getTenXe(), xe.getXuatXu(), xe.getHangXe(), xe.getGiaBan()));
 
         try {
             Parameter_Report_ThanhToan dataPrint = new Parameter_Report_ThanhToan(tenNhanVien, tenKhachHang,
                     String.valueOf(FormatMoney.formatMoney((long)((long)xe.getGiaBan() * 1.1 + 20000000)) + " VNĐ"), 
-                    Report.ReportManager_ThanhToan.getInstance().generateQrcode(), fields);
+                    Report.ReportManager_ThanhToan.getInstance().generateQrcode(), ngayNhap,
+                    String.valueOf(FormatMoney.formatMoney(xe.getGiaBan()) + " VNĐ"), 
+                    String.valueOf(FormatMoney.formatMoney((long)20000000) + " VNĐ"),
+                    String.valueOf(FormatMoney.formatMoney((long)((long)xe.getGiaBan() * 0.1)) + " VNĐ"),
+                    fields);
             ReportManager_ThanhToan.getInstance().compileReport();
             ReportManager_ThanhToan.getInstance().printReportPayment(dataPrint);
         } catch (Exception ex) {
@@ -1191,7 +1260,7 @@ public class fThanhToan extends javax.swing.JPanel {
         }
         try {
             long i = (long) Double.parseDouble(phone);
-            return true;
+            return i > 0;
         } catch (Exception e) {
         }
         return false;
@@ -1203,7 +1272,7 @@ public class fThanhToan extends javax.swing.JPanel {
         }
         try {
             long i = (long) Double.parseDouble(CCCD);
-            return true;
+            return i > 0;
         } catch (Exception e) {
         }
         return false;
@@ -1213,6 +1282,7 @@ public class fThanhToan extends javax.swing.JPanel {
     private Views.OtherForm.swing.MyButton btnQuayLai;
     private Views.OtherForm.swing.MyButton btnQuetMaQR;
     private Views.OtherForm.swing.MyButton btnThanhToan;
+    private Views.OtherForm.component.Combobox.Combobox cbbGioiTinh;
     private Views.OtherForm.component.Combobox.Combobox cbbQuanHuyen;
     private Views.OtherForm.component.Combobox.Combobox cbbTinhThanh;
     private javax.swing.JLabel jLabel1;
@@ -1270,7 +1340,6 @@ public class fThanhToan extends javax.swing.JPanel {
     private Views.OtherForm.swing.PictureBox picHinhAnh;
     private Views.OtherForm.swing.TextField_2 tfCCCD;
     private javax.swing.JLabel tfGia;
-    private Views.OtherForm.swing.TextField_2 tfGioiTinh;
     private javax.swing.JLabel tfHangXe;
     private Views.OtherForm.swing.TextField_2 tfHo;
     private Views.OtherForm.swing.TextField_2 tfNgaySinh;

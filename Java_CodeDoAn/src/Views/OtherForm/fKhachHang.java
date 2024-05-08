@@ -11,8 +11,11 @@ import Views.OtherForm.swing.TextField;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import raven.alerts.MessageAlerts;
@@ -33,6 +36,7 @@ public class fKhachHang extends javax.swing.JPanel {
     private void initAll() {
         initColumn();
         loadData();
+        loadGioiTinh();
         DisableTextField();
         DisableButtonSystem();
     }
@@ -56,8 +60,8 @@ public class fKhachHang extends javax.swing.JPanel {
         tfHoTen = new Views.OtherForm.swing.TextField();
         tfDiaChi = new Views.OtherForm.swing.TextField();
         tfNgaySinh = new Views.OtherForm.swing.TextField();
-        tfGioiTinh = new Views.OtherForm.swing.TextField();
         tfSoDienThoai = new Views.OtherForm.swing.TextField();
+        cbbGioiTinh = new Views.OtherForm.component.Combobox.Combobox();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
@@ -151,9 +155,9 @@ public class fKhachHang extends javax.swing.JPanel {
 
         tfNgaySinh.setLabelText("Ngày Sinh");
 
-        tfGioiTinh.setLabelText("Giới Tính");
-
         tfSoDienThoai.setLabelText("Số Điện Thoại");
+
+        cbbGioiTinh.setLabeText("Giới Tính");
 
         javax.swing.GroupLayout panelRoundLayout = new javax.swing.GroupLayout(panelRound);
         panelRound.setLayout(panelRoundLayout);
@@ -171,11 +175,11 @@ public class fKhachHang extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(tfSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(42, 42, 42)
-                .addGroup(panelRoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelRoundLayout.createSequentialGroup()
                         .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(tfGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tfDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
@@ -187,7 +191,7 @@ public class fKhachHang extends javax.swing.JPanel {
                     .addComponent(tfMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,8 +220,8 @@ public class fKhachHang extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)))
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
@@ -250,6 +254,10 @@ public class fKhachHang extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(2)) + 1;
+        tfMaKhachHang.setText(String.format("KH%04d", num));
+        tfMaKhachHang.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -264,10 +272,18 @@ public class fKhachHang extends javax.swing.JPanel {
         String maKH = tfMaKhachHang.getText();
         String hoTen = tfHoTen.getText();
         String ngSinh = tfNgaySinh.getText();
-        String gt = tfGioiTinh.getText();
+        String gt = cbbGioiTinh.getSelectedItem().toString();
         String cccd = tfCCCD.getText();
         String dc = tfDiaChi.getText();
         String sdt = tfSoDienThoai.getText();
+        
+        // Kiểm tra nhập
+        if (CheckEmptyInput()) { // Empty Input
+            MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập đầy đủ thông tin",
+                    MessageAlerts.MessageType.ERROR);
+            return;
+        }
+        
         java.sql.Date date = null;
         try {
             Date d = new SimpleDateFormat("yyyy-MM-dd").parse(ngSinh);
@@ -278,17 +294,10 @@ public class fKhachHang extends javax.swing.JPanel {
             tfNgaySinh.requestFocus();
             return;
         }
-
-        // Kiểm tra nhập
-        if (CheckEmptyInput()) { // Empty Input
-            MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập đầy đủ thông tin",
-                    MessageAlerts.MessageType.ERROR);
-            return;
-        }
         
         // Check SDT hợp lệ, CCCD hợp lệ
         if(!checkLegalNumberPhone(sdt)){
-            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại phải đúng 10 ký tự số!",
+            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại không hợp lệ!",
                     MessageAlerts.MessageType.ERROR);
             tfSoDienThoai.requestFocus();
             return;
@@ -296,7 +305,7 @@ public class fKhachHang extends javax.swing.JPanel {
         
         // Check Trùng CCCD, sdt ...
         if (!checkLegalCCCD(cccd)){
-            MessageAlerts.getInstance().showMessage("Fail!", "CCCD phải đúng 12 ký tự số!",
+            MessageAlerts.getInstance().showMessage("Fail!", "CCCD không hợp lệ!",
                     MessageAlerts.MessageType.ERROR);
             tfCCCD.requestFocus();
             return;
@@ -304,6 +313,20 @@ public class fKhachHang extends javax.swing.JPanel {
 
         KhachHang kh = new KhachHang(maKH, hoTen, date, gt, cccd, dc, sdt);
         if (strBtn.equals("Add")) {
+            if (KhachHangService.getInstance().checkDuplicateCCCD(cccd)) { // Aldready CCCD
+                MessageAlerts.getInstance().showMessage("Fail!", "CCCD này đã tồn tại, vui lòng kiểm tra lại!",
+                        MessageAlerts.MessageType.ERROR);
+                tfCCCD.requestFocus();
+                return;
+            }
+            
+            if (KhachHangService.getInstance().checkDuplicatePhone(sdt)) { // Aldready CCCD
+                MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại này đã tồn tại, vui lòng kiểm tra lại!",
+                        MessageAlerts.MessageType.ERROR);
+                tfSoDienThoai.requestFocus();
+                return;
+            }
+            
             // Kiểm tra khách hàng đã tồn tại chưa
             KhachHang tmp = KhachHangService.getInstance().findOne(maKH);
 
@@ -368,11 +391,24 @@ public class fKhachHang extends javax.swing.JPanel {
             });
         }
     }
+    
+    private void loadGioiTinh(){
+        List<String> list = new ArrayList<>();
+        list.add("Nam");
+        list.add("Nữ");
+        String[] arr = new String[list.size()];
+        for (int i=0; i<list.size(); i++){
+            arr[i] = list.get(i);
+        }
+        ComboBoxModel<String> model = new DefaultComboBoxModel<>(arr);
+        cbbGioiTinh.setModel(model);
+    }
 
     private void initColumn() {
         // Custom Table
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         tblKhachHang.setModel(dtm);
+        tblKhachHang.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Khách Hàng");
         dtm.addColumn("Họ Tên");
@@ -438,7 +474,7 @@ public class fKhachHang extends javax.swing.JPanel {
         tfMaKhachHang.setText(maKH);
         tfHoTen.setText(hoTen);
         tfNgaySinh.setText(nsinh);
-        tfGioiTinh.setText(gioiTinh);
+        cbbGioiTinh.setSelectedItem(gioiTinh);
         tfCCCD.setText(CCCD);
         tfDiaChi.setText(diaChi);
         tfSoDienThoai.setText(sdt);
@@ -450,7 +486,7 @@ public class fKhachHang extends javax.swing.JPanel {
         }
         try {
             long i = (long) Double.parseDouble(phone);
-            return true;
+            return i > 0;
         } catch (Exception e) {
         }
         return false;
@@ -462,7 +498,7 @@ public class fKhachHang extends javax.swing.JPanel {
         }
         try {
             long i = (long) Double.parseDouble(CCCD);
-            return true;
+            return i > 0;
         } catch (Exception e) {
         }
         return false;
@@ -545,6 +581,7 @@ public class fKhachHang extends javax.swing.JPanel {
     private Views.OtherForm.swing.MyButton btnEdit;
     private Views.OtherForm.swing.MyButton btnReset;
     private Views.OtherForm.swing.MyButton btnSave;
+    private Views.OtherForm.component.Combobox.Combobox cbbGioiTinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private Views.OtherForm.swing.PanelRound panelRound;
@@ -552,7 +589,6 @@ public class fKhachHang extends javax.swing.JPanel {
     private javax.swing.JTable tblKhachHang;
     private Views.OtherForm.swing.TextField tfCCCD;
     private Views.OtherForm.swing.TextField tfDiaChi;
-    private Views.OtherForm.swing.TextField tfGioiTinh;
     private Views.OtherForm.swing.TextField tfHoTen;
     private Views.OtherForm.swing.TextField tfMaKhachHang;
     private Views.OtherForm.swing.TextField tfNgaySinh;

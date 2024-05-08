@@ -196,8 +196,8 @@ public class fChiNhanh extends javax.swing.JPanel {
                                 .addGap(58, 58, 58)
                                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(56, 56, 56)
-                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 78, Short.MAX_VALUE)))
+                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 64, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -256,6 +256,13 @@ public class fChiNhanh extends javax.swing.JPanel {
                         MessageAlerts.MessageType.ERROR);
                 return;
             }
+            
+            if(ChiNhanhService.getInstance().checkSamePhone(soDT)){
+                MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại đã tồn tại!",
+                        MessageAlerts.MessageType.ERROR);
+                return;
+            }
+            
             boolean result = ChiNhanhService.getInstance().insert(cn);
             if (result) {
                 MessageAlerts.getInstance().showMessage("Success!", "Thêm chi nhánh mới thành công!",
@@ -319,6 +326,7 @@ public class fChiNhanh extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
 
         tblChiNhanh.setModel(dtm);
+        tblChiNhanh.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Chi Nhánh");
         dtm.addColumn("Tên Chi Nhánh");

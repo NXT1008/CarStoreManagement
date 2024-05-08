@@ -1,6 +1,8 @@
 
 package Report;
 
+import java.util.Date;
+
 
 public class Fields_Report_ThanhToan {
     private String tenXe;
@@ -49,5 +51,6 @@ public class Fields_Report_ThanhToan {
     public void setGia(long gia) {
         this.gia = gia;
     }
+    
     
 }

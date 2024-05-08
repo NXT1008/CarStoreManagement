@@ -10,6 +10,7 @@ import Views.OtherForm.swing.TextField;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -18,7 +19,18 @@ import raven.alerts.MessageAlerts;
 
 public class fProfile extends javax.swing.JPanel {
 
-    private final String maNhanVien;
+    private String maNhanVien;
+    private String cccdCu = "";
+    private String sdtCu = "";
+
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
+    }
+    
+    public fProfile(){
+        initComponents();
+        initAll();
+    }
     
     public fProfile(String maNhanVien) {
         initComponents();
@@ -28,6 +40,7 @@ public class fProfile extends javax.swing.JPanel {
     
     public void initAll(){
         loadMaChiNhanh();
+        loadGioiTinh();
         setData();
         DisableTextFieldTaiKhoan();
         DisableTextFieldNhanVien();
@@ -45,7 +58,7 @@ public class fProfile extends javax.swing.JPanel {
             tfHoTen.setText(nv.getHoTenNhanVien());
             tfCCCD.setText(nv.getCccd());
             tfNgaySinh.setText(nv.getNgaySinh().toString());
-            tfGioiTinh.setText(nv.getGioiTinh());
+            cbbGioiTinh.setSelectedItem(nv.getGioiTinh());
             tfDiaChi.setText(nv.getDiaChi());
             tfSoDienThoai.setText(nv.getSoDienThoai());
             tfChucVu.setText(nv.getChucVu());
@@ -61,6 +74,18 @@ public class fProfile extends javax.swing.JPanel {
         }
         ComboBoxModel<String> model = new DefaultComboBoxModel<>(arr);
         cbbMaChiNhanh.setModel(model);
+    }
+    
+    private void loadGioiTinh(){
+        List<String> list = new ArrayList<>();
+        list.add("Nam");
+        list.add("Nữ");
+        String[] arr = new String[list.size()];
+        for (int i=0; i<list.size(); i++){
+            arr[i] = list.get(i);
+        }
+        ComboBoxModel<String> model = new DefaultComboBoxModel<>(arr);
+        cbbGioiTinh.setModel(model);
     }
     
     private void EnableTextFieldTaiKhoan() {
@@ -116,14 +141,14 @@ public class fProfile extends javax.swing.JPanel {
         tfHoTen = new Views.OtherForm.swing.TextField();
         tfCCCD = new Views.OtherForm.swing.TextField();
         tfSoDienThoai = new Views.OtherForm.swing.TextField();
-        tfGioiTinh = new Views.OtherForm.swing.TextField();
         jLabel4 = new javax.swing.JLabel();
         btnLuuTT = new Views.OtherForm.swing.MyButton();
         btnCapNhatThongTin = new Views.OtherForm.swing.MyButton();
         cbbMaChiNhanh = new Views.OtherForm.component.Combobox.Combobox();
+        cbbGioiTinh = new Views.OtherForm.component.Combobox.Combobox();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("THÔNG TIN CÁ NHÂN");
 
@@ -138,7 +163,7 @@ public class fProfile extends javax.swing.JPanel {
         tfMatKhau.setLabelText("Mật Khẩu");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel3.setForeground(new java.awt.Color(51, 51, 255));
         jLabel3.setText("Thông tin tài khoản");
 
         btnDoiMatKhau.setBackground(new java.awt.Color(204, 255, 255));
@@ -179,15 +204,16 @@ public class fProfile extends javax.swing.JPanel {
                         .addComponent(tfTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRoundTaiKhoanLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jLabel3))
-                    .addGroup(panelRoundTaiKhoanLayout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addGroup(panelRoundTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLuuMK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(tfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundTaiKhoanLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113)
+                .addComponent(btnLuuMK, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(241, 241, 241))
         );
         panelRoundTaiKhoanLayout.setVerticalGroup(
             panelRoundTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +224,11 @@ public class fProfile extends javax.swing.JPanel {
                 .addGroup(panelRoundTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelRoundTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLuuMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(panelRoundTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLuuMK, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         panelRoundNhanVien.setBackground(new java.awt.Color(255, 255, 255));
@@ -223,10 +249,8 @@ public class fProfile extends javax.swing.JPanel {
 
         tfSoDienThoai.setLabelText("Số Điện Thoại");
 
-        tfGioiTinh.setLabelText("Giới Tính");
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel4.setForeground(new java.awt.Color(51, 51, 255));
         jLabel4.setText("Thông tin chi tiết");
 
         btnLuuTT.setBackground(new java.awt.Color(204, 255, 255));
@@ -258,6 +282,8 @@ public class fProfile extends javax.swing.JPanel {
 
         cbbMaChiNhanh.setLabeText("Chi Nhánh Làm Việc");
 
+        cbbGioiTinh.setLabeText("Giới Tính");
+
         javax.swing.GroupLayout panelRoundNhanVienLayout = new javax.swing.GroupLayout(panelRoundNhanVien);
         panelRoundNhanVien.setLayout(panelRoundNhanVienLayout);
         panelRoundNhanVienLayout.setHorizontalGroup(
@@ -276,22 +302,22 @@ public class fProfile extends javax.swing.JPanel {
                                 .addComponent(jLabel4)
                                 .addGap(107, 107, 107))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoundNhanVienLayout.createSequentialGroup()
-                                .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(tfHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(tfGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(44, 44, 44)))
                         .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(tfNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfCCCD, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
                         .addGap(48, 48, 48)
-                        .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                        .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                            .addComponent(tfSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(cbbMaChiNhanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         panelRoundNhanVienLayout.setVerticalGroup(
             panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,11 +332,11 @@ public class fProfile extends javax.swing.JPanel {
                     .addComponent(cbbMaChiNhanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(tfChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(panelRoundNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhatThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLuuTT, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,11 +348,11 @@ public class fProfile extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelRoundNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelRoundTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel2)
@@ -339,12 +365,12 @@ public class fProfile extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
-                .addComponent(panelRoundTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
+                .addComponent(panelRoundTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(0, 0, 0)
                 .addComponent(panelRoundNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -358,34 +384,15 @@ public class fProfile extends javax.swing.JPanel {
         EnableTextFieldNhanVien();
         btnLuuTT.setEnabled(true);
         btnCapNhatThongTin.setEnabled(false);
+        cccdCu = tfCCCD.getText();
+        sdtCu = tfSoDienThoai.getText();
     }//GEN-LAST:event_btnCapNhatThongTinActionPerformed
-
-    private void btnLuuMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuMKActionPerformed
-        String matKhau = tfMatKhau.getText();
-        
-        TaiKhoan tk = TaiKhoanService.getInstance().findByMaNhanVien(maNhanVien);
-        tk.setMatKhau(matKhau);
-        
-        boolean res = TaiKhoanService.getInstance().updatePassword(tk);
-        if (res) {
-            MessageAlerts.getInstance().showMessage("Success!", "Đổi mật khẩu thành công!",
-                    MessageAlerts.MessageType.SUCCESS);
-        } else {
-            MessageAlerts.getInstance().showMessage("Fail!", "Đổi mật khẩu thất bại!",
-                    MessageAlerts.MessageType.ERROR);
-        }
-        tfMatKhau.setText(tk.getMatKhau());
-        btnLuuMK.setEnabled(false);
-        btnDoiMatKhau.setEnabled(true);
-        DisableTextFieldTaiKhoan();
-        
-    }//GEN-LAST:event_btnLuuMKActionPerformed
 
     private void btnLuuTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTTActionPerformed
         String maNV = maNhanVien;
         String hoTen = tfHoTen.getText();
         String ngSinh = tfNgaySinh.getText();
-        String gt = tfGioiTinh.getText();
+        String gt = cbbGioiTinh.getSelectedItem().toString();
         String cccd = tfCCCD.getText();
         String dc = tfDiaChi.getText();
         String sdt = tfSoDienThoai.getText();
@@ -427,6 +434,21 @@ public class fProfile extends javax.swing.JPanel {
         }
         
         
+        if (NhanVienService.getInstance().checkSameCCCD(cccd) && !cccd.equals(cccdCu)) { // Aldready CCCD
+            MessageAlerts.getInstance().showMessage("Fail!", "CCCD này đã tồn tại, vui lòng kiểm tra lại!",
+                    MessageAlerts.MessageType.ERROR);
+            tfCCCD.requestFocus();
+            return;
+        }
+
+        if (NhanVienService.getInstance().checkSamePhone(sdt) && !sdt.equals(sdtCu)) { // Aldready CCCD
+            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại này đã tồn tại, vui lòng kiểm tra lại!",
+                    MessageAlerts.MessageType.ERROR);
+            tfSoDienThoai.requestFocus();
+            return;
+        }
+        
+        
         NhanVien nv = new NhanVien(maNV, hoTen, cccd, date, gt, dc, sdt, chucVu, tinhTrang, maCN, "");
         boolean result = NhanVienService.getInstance().update(nv);
         if (result) {
@@ -442,6 +464,27 @@ public class fProfile extends javax.swing.JPanel {
         btnCapNhatThongTin.setEnabled(true);
         
     }//GEN-LAST:event_btnLuuTTActionPerformed
+
+    private void btnLuuMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuMKActionPerformed
+        String matKhau = tfMatKhau.getText();
+        
+        TaiKhoan tk = TaiKhoanService.getInstance().findByMaNhanVien(maNhanVien);
+        tk.setMatKhau(matKhau);
+        
+        boolean res = TaiKhoanService.getInstance().updatePassword(tk);
+        System.out.println(tk);
+        if (res) {
+            MessageAlerts.getInstance().showMessage("Success!", "Đổi mật khẩu thành công!",
+                    MessageAlerts.MessageType.SUCCESS);
+        } else {
+            MessageAlerts.getInstance().showMessage("Fail!", "Đổi mật khẩu thất bại!",
+                    MessageAlerts.MessageType.ERROR);
+        }
+        tfMatKhau.setText(tk.getMatKhau());
+        btnLuuMK.setEnabled(false);
+        btnDoiMatKhau.setEnabled(true);
+        DisableTextFieldTaiKhoan();
+    }//GEN-LAST:event_btnLuuMKActionPerformed
 
     private boolean checkLegalNumberPhone(String phone){
         if (phone.length() != 10){
@@ -484,6 +527,7 @@ public class fProfile extends javax.swing.JPanel {
     private Views.OtherForm.swing.MyButton btnDoiMatKhau;
     private Views.OtherForm.swing.MyButton btnLuuMK;
     private Views.OtherForm.swing.MyButton btnLuuTT;
+    private Views.OtherForm.component.Combobox.Combobox cbbGioiTinh;
     private Views.OtherForm.component.Combobox.Combobox cbbMaChiNhanh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -494,7 +538,6 @@ public class fProfile extends javax.swing.JPanel {
     private Views.OtherForm.swing.TextField tfCCCD;
     private Views.OtherForm.swing.TextField tfChucVu;
     private Views.OtherForm.swing.TextField tfDiaChi;
-    private Views.OtherForm.swing.TextField tfGioiTinh;
     private Views.OtherForm.swing.TextField tfHoTen;
     private Views.OtherForm.swing.TextField tfMatKhau;
     private Views.OtherForm.swing.TextField tfNgaySinh;

@@ -85,7 +85,9 @@ public class MainController extends javax.swing.JFrame {
 
         fHome = new fHome();
 
-        fProfile = new fProfile(tk.getMaNhanVien());
+        fProfile = new fProfile();
+        fProfile.setMaNhanVien(tk.getMaNhanVien());
+        
         fChiTietXe = new fChiTietXe();
         fThanhToan = new fThanhToan();
 
@@ -101,7 +103,7 @@ public class MainController extends javax.swing.JFrame {
         // Event để mở Menu
         menu.addEventMenu((int index) -> {
             System.out.println(String.valueOf(index));
-            //System.out.println(tk.getTenDangNhap());
+            //System.out.println(tk.getMaNhanVien());
             //Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, (long) 200, "Message");
             refreshData();
             switch (index) {
@@ -170,6 +172,8 @@ public class MainController extends javax.swing.JFrame {
         menuItemProfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                fProfile.initAll();
                 setForm(fProfile);
             }
         });

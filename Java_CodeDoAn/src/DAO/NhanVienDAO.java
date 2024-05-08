@@ -89,6 +89,28 @@ public class NhanVienDAO {
         return null;
     }
     
+    public NhanVien findByPhone(String sdt){
+        NhanVien nv;
+        String query = "select * from NHANVIEN where soDienThoai = ?";
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, sdt);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                nv = new NhanVien(rs);
+                conn.close();
+                return nv;
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        return null;
+    }
+    
+    
+    
     public List<String> listMaNhanVien(){
         List<String> list = new ArrayList<>();
         String query = "select maNhanVien from NHANVIEN";

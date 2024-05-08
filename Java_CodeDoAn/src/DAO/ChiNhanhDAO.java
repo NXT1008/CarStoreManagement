@@ -77,6 +77,25 @@ public class ChiNhanhDAO {
         return null;
     }
     
+    public ChiNhanh findByPhone(String sdt){
+        ChiNhanh cn;
+        String query = "select * from CHINHANH where soDienThoai = ?";
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, sdt);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                cn = new ChiNhanh(rs);
+                return cn;
+            }
+            conn.close();
+        } catch (Exception e) {
+            
+        }
+        return null;
+    }
+    
     public boolean insert(ChiNhanh cn){
         String query = "exec Insert_CHINHANH ? , ? , ?, ?";
         try {

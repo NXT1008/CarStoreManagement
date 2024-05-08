@@ -52,6 +52,10 @@ public class ReportManager_ThanhToan {
         para.put("khachHang", data.getTenKhachHang());
         para.put("tongTien", data.getTongTien());
         para.put("qrcode", data.getQrcode());
+        para.put("ngayLap", data.getNgayLap());
+        para.put("giaOTo", data.getGiaOTo());
+        para.put("tongCacLoaiPhi", data.getTongCacLoaiPhi());
+        para.put("thueVAT", data.getThueVAT());
         
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data.getListFields()); // Fields 
         JasperPrint print = JasperFillManager.fillReport(report_ThanhToan, para, dataSource);

@@ -1,8 +1,6 @@
 
 package Views.OtherForm;
 
-import DAO.NhanVienDAO;
-import Models.ChiNhanh;
 import Models.NhanVien;
 import Services.ChiNhanhService;
 import Services.NhanVienService;
@@ -14,6 +12,7 @@ import Views.OtherForm.swing.TextField;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -39,6 +38,7 @@ public class fNhanVien extends javax.swing.JPanel {
         initColumn();
         loadData();
         loadMaChiNhanh();
+        loadGioiTinh();
         DisableTextField();
         DisableButtonSystem();
     }
@@ -65,8 +65,8 @@ public class fNhanVien extends javax.swing.JPanel {
         tfHoTen = new Views.OtherForm.swing.TextField();
         tfNgaySinh = new Views.OtherForm.swing.TextField();
         tfChucVu = new Views.OtherForm.swing.TextField();
-        tfGioiTinh = new Views.OtherForm.swing.TextField();
         tfDiaChi = new Views.OtherForm.swing.TextField();
+        cbbGioiTinh = new Views.OtherForm.component.Combobox.Combobox();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
@@ -166,9 +166,9 @@ public class fNhanVien extends javax.swing.JPanel {
 
         tfChucVu.setLabelText("Chức Vụ");
 
-        tfGioiTinh.setLabelText("Giới Tính");
-
         tfDiaChi.setLabelText("Địa Chỉ");
+
+        cbbGioiTinh.setLabeText("Giới Tính");
 
         javax.swing.GroupLayout panelRoundLayout = new javax.swing.GroupLayout(panelRound);
         panelRound.setLayout(panelRoundLayout);
@@ -184,9 +184,9 @@ public class fNhanVien extends javax.swing.JPanel {
                     .addComponent(tfHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(panelRoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfNgaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(tfGioiTinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelRoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(panelRoundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
@@ -212,8 +212,8 @@ public class fNhanVien extends javax.swing.JPanel {
                     .addComponent(tfCCCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbMaChiNhanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -236,7 +236,7 @@ public class fNhanVien extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,7 +288,7 @@ public class fNhanVien extends javax.swing.JPanel {
         String maNV = tfMaNhanVien.getText();
         String hoTen = tfHoTen.getText();
         String ngSinh = tfNgaySinh.getText();
-        String gt = tfGioiTinh.getText();
+        String gt = cbbGioiTinh.getSelectedItem().toString();
         String cccd = tfCCCD.getText();
         String dc = tfDiaChi.getText();
         String sdt = tfSoDienThoai.getText();
@@ -315,7 +315,7 @@ public class fNhanVien extends javax.swing.JPanel {
         
         // Check SDT hợp lệ, CCCD hợp lệ
         if(!checkLegalNumberPhone(sdt)){
-            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại phải đúng 10 ký tự số!",
+            MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại không hợp lệ!",
                     MessageAlerts.MessageType.ERROR);
             tfSoDienThoai.requestFocus();
             return;
@@ -323,7 +323,7 @@ public class fNhanVien extends javax.swing.JPanel {
         
         // Check Trùng CCCD, sdt ...
         if (!checkLegalCCCD(cccd)){
-            MessageAlerts.getInstance().showMessage("Fail!", "CCCD phải đúng 12 ký tự số!",
+            MessageAlerts.getInstance().showMessage("Fail!", "CCCD không hợp lệ!",
                     MessageAlerts.MessageType.ERROR);
             tfCCCD.requestFocus();
             return;
@@ -336,6 +336,13 @@ public class fNhanVien extends javax.swing.JPanel {
                 MessageAlerts.getInstance().showMessage("Fail!", "CCCD này đã tồn tại, vui lòng kiểm tra lại!",
                         MessageAlerts.MessageType.ERROR);
                 tfCCCD.requestFocus();
+                return;
+            }
+            
+            if (NhanVienService.getInstance().checkSamePhone(sdt)) { // Aldready CCCD
+                MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại này đã tồn tại, vui lòng kiểm tra lại!",
+                        MessageAlerts.MessageType.ERROR);
+                tfSoDienThoai.requestFocus();
                 return;
             }
             
@@ -413,12 +420,26 @@ public class fNhanVien extends javax.swing.JPanel {
         ComboBoxModel<String> model = new DefaultComboBoxModel<>(arr);
         cbbMaChiNhanh.setModel(model);
     }
+    
+    private void loadGioiTinh(){
+        List<String> list = new ArrayList<>();
+        list.add("Nam");
+        list.add("Nữ");
+        String[] arr = new String[list.size()];
+        for (int i=0; i<list.size(); i++){
+            arr[i] = list.get(i);
+        }
+        ComboBoxModel<String> model = new DefaultComboBoxModel<>(arr);
+        cbbGioiTinh.setModel(model);
+    }
 
     private void initColumn() {
         // Custom Table
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
 
         tblNhanVien.setModel(dtm);
+        tblNhanVien.setDefaultEditor(Object.class, null);
+        
 
         dtm.addColumn("Mã Nhân Viên");
         dtm.addColumn("Họ Tên");
@@ -478,7 +499,7 @@ public class fNhanVien extends javax.swing.JPanel {
         tfHoTen.setText(tblNhanVien.getValueAt(idx, 1).toString());
         tfCCCD.setText(tblNhanVien.getValueAt(idx, 2).toString());
         tfNgaySinh.setText(tblNhanVien.getValueAt(idx, 3).toString());
-        tfGioiTinh.setText(tblNhanVien.getValueAt(idx, 4).toString());
+        cbbGioiTinh.setSelectedItem(tblNhanVien.getValueAt(idx, 4).toString());
         tfDiaChi.setText(tblNhanVien.getValueAt(idx, 5).toString());
         tfSoDienThoai.setText(tblNhanVien.getValueAt(idx, 6).toString());
         tfChucVu.setText(tblNhanVien.getValueAt(idx, 7).toString());
@@ -492,7 +513,7 @@ public class fNhanVien extends javax.swing.JPanel {
         }
         try {
             long i = (long) Double.parseDouble(phone);
-            return true;
+            return i > 0;
         } catch (Exception e) {
         }
         return false;
@@ -504,7 +525,7 @@ public class fNhanVien extends javax.swing.JPanel {
         }
         try {
             long i = (long) Double.parseDouble(CCCD);
-            return true;
+            return i > 0;
         } catch (Exception e) {
         }
         return false;
@@ -587,6 +608,7 @@ public class fNhanVien extends javax.swing.JPanel {
     private Views.OtherForm.swing.MyButton btnEdit;
     private Views.OtherForm.swing.MyButton btnReset;
     private Views.OtherForm.swing.MyButton btnSave;
+    private Views.OtherForm.component.Combobox.Combobox cbbGioiTinh;
     private Views.OtherForm.component.Combobox.Combobox cbbMaChiNhanh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -596,7 +618,6 @@ public class fNhanVien extends javax.swing.JPanel {
     private Views.OtherForm.swing.TextField tfCCCD;
     private Views.OtherForm.swing.TextField tfChucVu;
     private Views.OtherForm.swing.TextField tfDiaChi;
-    private Views.OtherForm.swing.TextField tfGioiTinh;
     private Views.OtherForm.swing.TextField tfHoTen;
     private Views.OtherForm.swing.TextField tfMaNhanVien;
     private Views.OtherForm.swing.TextField tfNgaySinh;

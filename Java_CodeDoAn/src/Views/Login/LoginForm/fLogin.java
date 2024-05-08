@@ -1,7 +1,9 @@
 
 package Views.Login.LoginForm;
 
+import DAO.SendEmailDAO;
 import DAO.TaiKhoanDAO;
+import Models.MessageModel;
 import Models.TaiKhoan;
 import Services.TaiKhoanService;
 import Views.Login.components.*;
@@ -146,6 +148,23 @@ public class fLogin extends javax.swing.JFrame {
             }
             
         });
+        
+        //verify code
+        verifyCode.addEventButtonOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                TaiKhoan user = loginAndRegister.getUser();
+                if (TaiKhoanDAO.getInstance().checkVerifyCode(user.getMaNhanVien(), verifyCode.getInputCode())) {
+                    TaiKhoanDAO.getInstance().doneVerify(user.getMaNhanVien());
+                    verifyCode.setVisible(false);
+                    MessageAlerts.getInstance().showMessage("Success", "Đăng ký thành công!!", 
+                        MessageAlerts.MessageType.SUCCESS);
+                } else {
+                    MessageAlerts.getInstance().showMessage("Fail", "Vui lòng kiểm tra lại mã xác nhận!!", 
+                        MessageAlerts.MessageType.ERROR);
+                }
+            }
+        });
     }
     
     private void register(){
@@ -172,8 +191,7 @@ public class fLogin extends javax.swing.JFrame {
         }
         boolean res = TaiKhoanService.getInstance().register(taiKhoan);
         if (res){
-            MessageAlerts.getInstance().showMessage("Success", "Đăng ký thành công!!", 
-                    MessageAlerts.MessageType.SUCCESS);
+            sendMain(taiKhoan);
         }
         else{
             MessageAlerts.getInstance().showMessage("Fail!", "Đăng ký thất bại, vui lòng kiểm tra chính xác Mã nhân viên!!", 
@@ -201,6 +219,26 @@ public class fLogin extends javax.swing.JFrame {
     public static TaiKhoan getTk() {
         return tk;
     }
+    
+    private void sendMain(TaiKhoan tk) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loading.setVisible(true);
+                MessageModel ms = new SendEmailDAO().sendMain(tk.getEmail(), tk.getVerifyCode());
+                if (ms.isSuccess()) {
+                    loading.setVisible(false);
+                    verifyCode.setVisible(true);
+                } else {
+                    loading.setVisible(false);
+                    //showMessage(Message.MessageType.ERROR, ms.getMessage());
+                    
+                }
+            }
+        }).start();
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

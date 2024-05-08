@@ -196,8 +196,8 @@ public class fDichVuBaoDuong extends javax.swing.JPanel {
                                 .addGap(58, 58, 58)
                                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(56, 56, 56)
-                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 74, Short.MAX_VALUE)))
+                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 62, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -226,6 +226,10 @@ public class fDichVuBaoDuong extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(4)) + 1;
+        tfMaBaoDuong.setText(String.format("DVBD%04d", num));
+        tfMaBaoDuong.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -318,6 +322,7 @@ public class fDichVuBaoDuong extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
 
         tblDichVuBaoDuong.setModel(dtm);
+        tblDichVuBaoDuong.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Bảo Dưỡng");
         dtm.addColumn("Tên Bảo Dưỡng");

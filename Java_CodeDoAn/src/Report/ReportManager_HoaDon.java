@@ -40,6 +40,10 @@ public class ReportManager_HoaDon {
         para.put("diaChiKhachHang", data.getDiaChiKH());
         para.put("soDienThoaiKhachHang", data.getSoDienThoaiKH());
         para.put("CCCDKhachHang", data.getCCCDKhachHang());
+        para.put("giaOTo", data.getGiaOTo());
+        para.put("tongCacLoaiPhi", data.getTongCacLoaiPhi());
+        para.put("thueVAT", data.getThueVAT());
+        para.put("tongTien", data.getTongTien());
         
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data.getListFields()); // Fields 
         JasperPrint print = JasperFillManager.fillReport(report_HoaDon, para, dataSource);

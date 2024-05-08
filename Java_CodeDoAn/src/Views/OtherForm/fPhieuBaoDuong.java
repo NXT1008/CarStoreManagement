@@ -219,8 +219,8 @@ public class fPhieuBaoDuong extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)))
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -253,6 +253,11 @@ public class fPhieuBaoDuong extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(3)) + 1;
+        tfMaPhieuBD.setText(String.format("PBD%04d", num));
+        tfMaPhieuBD.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -398,6 +403,7 @@ public class fPhieuBaoDuong extends javax.swing.JPanel {
         // Custom Table
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         tblPhieuBaoDuong.setModel(dtm);
+        tblPhieuBaoDuong.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Phiếu Bảo Dưỡng");
         dtm.addColumn("Mã Bảo Dưỡng");

@@ -198,8 +198,8 @@ public class fNhaCungCap extends javax.swing.JPanel {
                                 .addGap(58, 58, 58)
                                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(56, 56, 56)
-                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 74, Short.MAX_VALUE)))
+                                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 62, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -228,6 +228,10 @@ public class fNhaCungCap extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(3)) + 1;
+        tfMaNhaCungCap.setText(String.format("NCC%04d", num));
+        tfMaNhaCungCap.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -255,6 +259,12 @@ public class fNhaCungCap extends javax.swing.JPanel {
             NhaCungCap tmp = NhaCungCapService.getInstance().findOne(maNCC);
             if (tmp != null) { // Already Exist ChiNhanh
                 MessageAlerts.getInstance().showMessage("Fail!", "Nhà cung cấp đã tồn tại!",
+                        MessageAlerts.MessageType.ERROR);
+                return;
+            }
+            
+            if(NhaCungCapService.getInstance().checkSamePhone(soDT)){
+                MessageAlerts.getInstance().showMessage("Fail!", "Số điện thoại đã tồn tại!",
                         MessageAlerts.MessageType.ERROR);
                 return;
             }

@@ -85,6 +85,26 @@ public class NhaCungCapDAO {
         return null;
     }
     
+    public NhaCungCap findByPhone(String sdt){
+        NhaCungCap ncc;
+        String query = "select * from NHACUNGCAP where soDienThoai = ?";
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, sdt);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                ncc = new NhaCungCap(rs);
+                return ncc;
+            }
+            
+            conn.close();
+        } catch (Exception e) {
+        }
+        
+        return null;
+    }
+    
     public boolean insert(NhaCungCap model){
         String query = "exec Insert_NhaCungCap ?,?,?,?";
         try {

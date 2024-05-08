@@ -94,7 +94,7 @@ public class fThongKe extends javax.swing.JPanel {
         jLayeredPane1.add(cardTongPhieuBaoDuong);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("THỐNG KÊ SỐ LƯỢNG");
 

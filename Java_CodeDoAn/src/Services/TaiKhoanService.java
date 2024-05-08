@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Services;
 import Models.TaiKhoan;
 import DAO.TaiKhoanDAO;
 import java.util.List;
-/**
- *
- * @author WIN 10
- */
+
 public class TaiKhoanService {
     private static TaiKhoanService instance;
 

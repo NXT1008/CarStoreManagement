@@ -27,12 +27,14 @@ public class PanelCover extends javax.swing.JPanel {
     private JLabel description1;
     private JLabel image;
     private ButtonOutLine button;
+    private ButtonOutLine btnExit;
     private boolean isLogin;
     
     public PanelCover() {
         initComponents();
         setOpaque(false);
         layout = new MigLayout("wrap, fill", "[center]", "push[]25[]10[]25[]push");
+        //layout = new MigLayout("wrap 1, align center", "", "");
         setLayout(layout);
         init();
     }
@@ -48,7 +50,6 @@ public class PanelCover extends javax.swing.JPanel {
         super.paintChildren(grphcs);
     }
 
-
     private void init(){
         title = new JLabel("Hello, Friend!");
         title.setFont(new Font("sansserif", 1, 30));
@@ -57,7 +58,7 @@ public class PanelCover extends javax.swing.JPanel {
         
         description = new JLabel("Enter your personal details");
         description.setForeground(new Color(245, 245, 245));
-        add(description);
+        add(description, "gapbottom 10px, align center, wrap");
         description1 = new JLabel("and start journey with us");
         description1.setForeground(new Color(245, 245, 245));
         add(description1);
@@ -77,7 +78,61 @@ public class PanelCover extends javax.swing.JPanel {
             }
         });
         add(button, "w 60%, h 40");
+        
+        btnExit = new ButtonOutLine();
+        btnExit.setBackground(new Color(255, 255, 255));
+        btnExit.setForeground(new Color(255, 255, 255));
+        btnExit.setText("EXIT");
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.exit(0);
+            }
+        });
+        //add(btnExit, "w 20%, h 20");
     }
+    
+//    private void init(){
+//        title = new JLabel("Hello, Friend!");
+//        title.setFont(new Font("sansserif", 1, 30));
+//        title.setForeground(new Color(245, 245, 245));
+//        add(title, "align center, gaptop 30px, gapbottom 15px, wrap");
+//        
+//        description = new JLabel("Enter your personal details");
+//        description.setForeground(new Color(245, 245, 245));
+//        add(description, "gapbottom 10px, align center, wrap");
+//        description1 = new JLabel("and start journey with us");
+//        description1.setForeground(new Color(245, 245, 245));
+//        add(description1, "gapbottom 10px, align center, wrap");
+//        
+//        ImageIcon icon = new ImageIcon(getClass().getResource("/Views/Login/Icon/car2.gif"));
+//        image = new JLabel(icon, JLabel.CENTER);
+//        add(image, "gapbottom 10px, align center, wrap");
+//        
+//        button = new ButtonOutLine();
+//        button.setBackground(new Color(255, 255, 255));
+//        button.setForeground(new Color(255, 255, 255));
+//        button.setText("SIGN UP");
+//        button.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                event.actionPerformed(ae);
+//            }
+//        });
+//        add(button, "w 60%, h 40, gapbottom 10px, align center, wrap");
+//        
+//        btnExit = new ButtonOutLine();
+//        btnExit.setBackground(new Color(255, 255, 255));
+//        btnExit.setForeground(new Color(255, 255, 255));
+//        btnExit.setText("EXIT");
+//        btnExit.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                System.exit(0);
+//            }
+//        });
+//        add(btnExit, "w 60%, h 40, gapbottom 10px, align center, wrap");
+//    }
     
     @Override
     protected void paintComponent(Graphics g) {

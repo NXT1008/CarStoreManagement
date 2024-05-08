@@ -42,6 +42,11 @@ public class NhanVienService {
         return (NhanVienDAO.getInstance().findByCCCD(CCCD) != null);
     }
     
+    public boolean checkSamePhone(String sdt){
+        // Same -> True
+        return (NhanVienDAO.getInstance().findByPhone(sdt) != null);
+    }
+    
 //    public static void main(String[] args) {
 //        java.sql.Date date = null;
 //        try {

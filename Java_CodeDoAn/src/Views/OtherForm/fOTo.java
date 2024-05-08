@@ -249,7 +249,7 @@ public class fOTo extends javax.swing.JPanel {
                         .addGap(58, 58, 58)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -284,6 +284,10 @@ public class fOTo extends javax.swing.JPanel {
         EnableTextField();
         EnableButtonSystem();
         DisableButtonEditData();
+        String maPBD = dtm.getValueAt(dtm.getRowCount()-1, 0).toString();
+        int num = Integer.parseInt(maPBD.substring(2)) + 1;
+        tfMaXe.setText(String.format("XE%04d", num));
+        tfMaXe.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -312,6 +316,11 @@ public class fOTo extends javax.swing.JPanel {
         long giaBan = 0;
         try {
             giaBan = (long)Double.parseDouble(tfGiaBan.getText());
+            if (giaBan <= 0){
+                MessageAlerts.getInstance().showMessage("Fail!", "Giá bán phải là số nguyên dương!",
+                    MessageAlerts.MessageType.ERROR);
+            return;
+            }
         } catch (NumberFormatException e) {
             MessageAlerts.getInstance().showMessage("Fail!", "Giá bán phải là giá trị tiền tệ!",
                     MessageAlerts.MessageType.ERROR);
@@ -358,7 +367,7 @@ public class fOTo extends javax.swing.JPanel {
         
         Xe xe = new Xe(maXe, tenXe, giaBan, xuatXu, tenHang, trongLuong, congSuat, dongCo, hinhAnh);
         if (strBtn.equals("Add")) {
-            // Kiểm tra khách hàng đã tồn tại chưa
+            // Kiểm tra xe đã tồn tại chưa
             Xe tmp = XeService.getInstance().findOne(maXe);
 
             if (tmp != null) { // Nếu đã tồn tại
@@ -478,6 +487,7 @@ public class fOTo extends javax.swing.JPanel {
         // Custom Table
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         tblOTo.setModel(dtm);
+        tblOTo.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã OTo");
         dtm.addColumn("Tên OTo");

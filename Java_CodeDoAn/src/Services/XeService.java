@@ -2,6 +2,7 @@
 package Services;
 import Models.Xe;
 import DAO.XeDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 public class XeService {
@@ -43,5 +44,18 @@ public class XeService {
     
     public boolean delete(String model){
         return XeDAO.getInstance().delete(model);
+    }
+    
+    // Method to search Xe objects based on a keyword
+    public List<Xe> timKiemXe(String keyword) {
+        List<Xe> result = new ArrayList<>();
+        // Iterate through your list of Xe objects and filter them based on the keyword
+        for (Xe xe : danhSachXe()) {
+            // Perform your search logic here, for example, if you want to search based on a field like tenXe
+            if (xe.getTenXe().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(xe);
+            }
+        }
+        return result;
     }
 }

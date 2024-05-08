@@ -42,4 +42,8 @@ public class NhaCungCapService {
     public boolean delete(String model){
         return NhaCungCapDAO.getInstance().delete(model);
     }
+    
+    public boolean checkSamePhone(String sdt){
+        return (NhaCungCapDAO.getInstance().findByPhone(sdt) != null);
+    }
 }
