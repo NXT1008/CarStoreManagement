@@ -31,7 +31,6 @@ import raven.alerts.MessageAlerts;
 import raven.popup.GlassPanePopup;
 import raven.popup.component.PopupCallbackAction;
 import raven.popup.component.PopupController;
-import raven.toast.Notifications;
 
 public class MainController extends javax.swing.JFrame {
 
@@ -79,7 +78,6 @@ public class MainController extends javax.swing.JFrame {
         fKho = new fKho();
         fPhieuBaoDuong = new fPhieuBaoDuong();
         fThongKe = new fThongKe();
-        //fchart = new fChartHoaDon();
         fDoanhThu = new fDoanhThu();
         fBieuDo = new fLapBieuDo();
 
@@ -224,20 +222,19 @@ public class MainController extends javax.swing.JFrame {
 
     private void refreshData() {
         // Load lại dữ liệu cho các form khi cần
-        fNhanVien.loadData(); // Load dữ liệu cho form Nhân viên
-        fOTo.loadData(); // Load dữ liệu cho form Ô tô
-        fKhachhang.loadData(); // Load dữ liệu cho form Khách hàng
-        fChiNhanh.loadData(); // Load dữ liệu cho form Chi nhánh
-        fNhaCungCap.loadData(); // Load dữ liệu cho form Nhà cung cấp
-        fHoaDon.loadData(); // Load dữ liệu cho form Hóa đơn
-        fPhieuNhap.loadData(); // Load dữ liệu cho form Phiếu nhập
-        fDichVuBaoDuong.loadData(); // Load dữ liệu cho form Dịch vụ bảo dưỡng
-        fPhieuBaoDuong.loadData(); // Load dữ liệu cho form Phiếu bảo dưỡng
-        fThongKe.LoadDataToCard();// Load dữ liệu cho form Thống kê
-        fDoanhThu.loadData(); // Load dữ liệu cho form Doanh thu
-//        fBieuDo.loadData(); // Load dữ liệu cho form Biểu đồ
-        fHome.loadAll(); // Load dữ liệu cho form Trang chủ (nếu cần)
-        fProfile.initAll();// Cập nhật thông tin profile
+        fNhanVien.loadData(); 
+        fOTo.loadData(); 
+        fKhachhang.loadData(); 
+        fChiNhanh.loadData(); 
+        fNhaCungCap.loadData();
+        fHoaDon.loadData();
+        fPhieuNhap.loadData();
+        fDichVuBaoDuong.loadData();
+        fPhieuBaoDuong.loadData();
+        fThongKe.LoadDataToCard();
+        fDoanhThu.loadData(); 
+        fHome.loadAll(); 
+        fProfile.initAll();
         fKho.loadData();
     }
 

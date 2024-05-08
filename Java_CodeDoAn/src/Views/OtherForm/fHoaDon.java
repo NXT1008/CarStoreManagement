@@ -293,7 +293,6 @@ public class fHoaDon extends javax.swing.JPanel {
         int num = Integer.parseInt(maPBD.substring(2)) + 1;
         tfMaHoaDon.setText(String.format("HD%04d", num));
         tfMaHoaDon.setEditable(false);
-        tfTinhTrang.setEditable(false);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed

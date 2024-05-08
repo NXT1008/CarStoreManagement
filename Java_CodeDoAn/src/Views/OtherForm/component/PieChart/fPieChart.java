@@ -37,15 +37,36 @@ public class fPieChart extends javax.swing.JPanel {
     private void showData(String month, String year){
         pieChart.clearData();
         List<pieChartXeModel> list = chartDAO.getInstance().listChartXe(month, year);
-        int index = 0;
             for (int i=0; i<list.size(); i++){
-                if (index == 6) index = 0;
-                pieChart.addData(new ModelPieChart(list.get(i).getTenXe(), list.get(i).getTotal(), getColor(index++)));
+                pieChart.addData(new ModelPieChart(list.get(i).getTenXe(), list.get(i).getTotal(), getColor(i)));
             }
     }
     
     private Color getColor(int index){
-        Color[] color = new Color[]{new Color(255,102,102), new Color(206, 215,33), new Color(58,55,227), new Color(29,184,85), new Color(94,217,214), new Color(43,45,250), new Color(200,169,86)};
+        Color[] color = new Color[]{
+            new Color(255,102,102), 
+            new Color(227, 0, 159), 
+            new Color(189, 9, 0), 
+            new Color(29,184,85), 
+            new Color(94,217,214), 
+            new Color(43,45,250), 
+            new Color(200,169,86),
+            new Color(183, 83, 247),
+            new Color(74, 126, 247),
+            new Color(158, 85, 106),
+            new Color(65, 62, 80),
+            new Color(20, 87, 120),
+            new Color(166, 0, 88),
+            new Color(209, 80, 0),
+            new Color(124, 92, 158),
+            new Color(1, 145, 97),
+            new Color(76, 37, 217),
+            new Color(194, 60, 194),
+            new Color(105, 6, 158),
+            new Color(158, 5, 115),
+            new Color(166, 51, 57),
+            new Color(0, 207, 151)
+        };
         return color[index];
     }
 

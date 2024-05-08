@@ -329,6 +329,7 @@ public class fNhaCungCap extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
 
         tblNhaCungCap.setModel(dtm);
+        tblNhaCungCap.setDefaultEditor(Object.class, null);
 
         dtm.addColumn("Mã Nhà Cung Cấp");
         dtm.addColumn("Tên Nhà Cung Cấp");

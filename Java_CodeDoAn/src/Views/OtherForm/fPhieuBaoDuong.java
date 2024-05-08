@@ -290,6 +290,12 @@ public class fPhieuBaoDuong extends javax.swing.JPanel {
         long tongTien = 0;
         try {
             tongTien = (long) Double.parseDouble(tfTongTien.getText());
+            if (tongTien <= 0){
+                MessageAlerts.getInstance().showMessage("Fail!", "Tổng tiền phải là số nguyên dương!",
+                    MessageAlerts.MessageType.ERROR);
+            tfTongTien.requestFocus();
+            return;
+            }
         } catch (Exception e) {
             MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập giá trị số cho tổng tiền!",
                     MessageAlerts.MessageType.ERROR);

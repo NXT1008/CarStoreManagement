@@ -244,7 +244,6 @@ public class fDichVuBaoDuong extends javax.swing.JPanel {
         String maBD = tfMaBaoDuong.getText();
         String tenBD = tfTenBaoDuong.getText();
         String loaiBD = tfLoaiBaoDuong.getText();
-        long phiBD = (long) Double.parseDouble(tfPhiBaoDuong.getText());
 
         if (CheckEmptyInput()) { // Empty Input
             MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập đầy đủ thông tin",
@@ -252,17 +251,34 @@ public class fDichVuBaoDuong extends javax.swing.JPanel {
             return;
         }
         
+        // Kiểm tra số tiền nhập có hợp lệ
+        long phiBD = 0;
+        try {
+            phiBD = (long) Double.parseDouble(tfPhiBaoDuong.getText());
+            if (phiBD <= 0){
+                MessageAlerts.getInstance().showMessage("Fail!", "phí bảo dưỡng phải là số nguyên dương!",
+                    MessageAlerts.MessageType.ERROR);
+            tfPhiBaoDuong.requestFocus();
+            return;
+            }
+        } catch (Exception e) {
+            MessageAlerts.getInstance().showMessage("Fail!", "Vui lòng nhập giá trị số cho phí bảo dưỡng!",
+                    MessageAlerts.MessageType.ERROR);
+            tfPhiBaoDuong.requestFocus();
+            return;
+        }
+        
         DichVuBaoDuong dvbd = new DichVuBaoDuong(maBD, tenBD, loaiBD, phiBD);
         if (strBtn.equals("Add")) { // Add
             DichVuBaoDuong tmp = DichVuBaoDuongService.getInstance().findOne(maBD);
             if (tmp != null) { // Already Exist ChiNhanh
-                MessageAlerts.getInstance().showMessage("Fail!", "Chi nhánh đã tồn tại!",
+                MessageAlerts.getInstance().showMessage("Fail!", "Dịch vụ bảo dưỡng đã tồn tại!",
                         MessageAlerts.MessageType.ERROR);
                 return;
             }
             boolean result = DichVuBaoDuongService.getInstance().insert(dvbd);
             if (result) {
-                MessageAlerts.getInstance().showMessage("Success!", "Thêm chi nhánh mới thành công!",
+                MessageAlerts.getInstance().showMessage("Success!", "Thêm Dịch vụ bảo dưỡng mới thành công!",
                         MessageAlerts.MessageType.SUCCESS);
             } else {
                 MessageAlerts.getInstance().showMessage("Fail!", "Thêm thất bại!",
